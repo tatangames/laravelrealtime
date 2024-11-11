@@ -14,7 +14,7 @@ use App\Events\MessageSent;
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     //return view('dashboard');
     return view('pruebapusher');
 });
@@ -28,12 +28,12 @@ Route::post('/send-message', function (\Illuminate\http\Request $request){
    $name = $request->name;
    event(new MessageSent("pepe", "holaa pepe"));
    return response()->json(['status' => 'success']);
-});*/
+});
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     //return view('dashboard');
     return view('pruebapusher');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users', [ProfileController::class, 'vistaUsuario']);
+
+Route::get('/game', [ProfileController::class, 'vistaGame']);
 
 
 require __DIR__.'/auth.php';

@@ -21,6 +21,12 @@ class ProfileController extends Controller
     }
 
 
+    public function vistaGame()
+    {
+        return view('users.showGame');
+    }
+
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
