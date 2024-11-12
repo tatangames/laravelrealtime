@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent2;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -14,6 +16,11 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function vistaUsuario()
     {
@@ -70,4 +77,27 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+
+    public function showChat()
+    {
+        return view('users.showChat');
+    }
+
+    public function mensajeRecibido(Request $request)
+    {
+
+        Log::info("llegaaa");
+        $rules = [
+            'message' => 'required'
+        ];
+
+
+        broadcast(new MessageSent2($request->user(), $request->message));
+
+        return response()->json('Message broadcast');
+    }
+
+
 }

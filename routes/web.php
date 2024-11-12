@@ -46,4 +46,12 @@ Route::get('/users', [ProfileController::class, 'vistaUsuario']);
 Route::get('/game', [ProfileController::class, 'vistaGame']);
 
 
+
+Route::get('/chat', [ProfileController::class, 'showChat'])->name('chat.show');
+Route::post('/chat/message', [ProfileController::class, 'mensajeRecibido']);
+
+
+
+
+
 require __DIR__.'/auth.php';
